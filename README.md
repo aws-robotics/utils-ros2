@@ -1,7 +1,4 @@
-## Utils Ros2
+* The src directory contains aws_common (ROS-agnostic), aws_ros1_common, and aws_ros2_common packages. These can all be built in place as follows:
 
-ROS2 common packages for facilitating the use of AWS cloud services.
+ * Build: `colcon build`
 
-## License
-
-This library is licensed under the Apache 2.0 License. 
