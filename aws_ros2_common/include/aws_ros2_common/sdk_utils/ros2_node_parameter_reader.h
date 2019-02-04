@@ -28,33 +28,15 @@ class Ros2NodeParameterReader : public ParameterReaderInterface
 public:
     Ros2NodeParameterReader(const std::weak_ptr<rclcpp::Node> node) : node_(node) {}
 
-    using ParameterReaderInterface::ReadList;
-    using ParameterReaderInterface::ReadDouble;
-    using ParameterReaderInterface::ReadInt;
-    using ParameterReaderInterface::ReadBool;
-    using ParameterReaderInterface::ReadStdString;
-    using ParameterReaderInterface::ReadString;
-    using ParameterReaderInterface::ReadMap;
-
-    AwsError ReadList(const char * name, std::vector<std::string> & out) const override;
-    AwsError ReadDouble(const char * name, double & out) const override;
-    AwsError ReadInt(const char * name, int & out) const override;
-    AwsError ReadBool(const char * name, bool & out) const override;
-    AwsError ReadStdString(const char * name, std::string & out) const override;
-    AwsError ReadString(const char * name, Aws::String & out) const override;
-    AwsError ReadMap(const char * name, std::map<std::string, std::string> & out) const override;
+    AwsError ReadParam(const ParameterPath & param_path, std::vector<std::string> & out) const override;
+    AwsError ReadParam(const ParameterPath & param_path, double & out) const override;
+    AwsError ReadParam(const ParameterPath & param_path, int & out) const override;
+    AwsError ReadParam(const ParameterPath & param_path, bool & out) const override;
+    AwsError ReadParam(const ParameterPath & param_path, std::string & out) const override;
+    AwsError ReadParam(const ParameterPath & param_path, Aws::String & out) const override;
+    AwsError ReadParam(const ParameterPath & param_path, std::map<std::string, std::string> & out) const override;
 
 private:
-    std::string FormatParameterPath(const ParameterPath & param_path) const override;
-
-    /**
-     * Generic parameter reading helper function.
-     * @param parameter_path object representing the parameter's path
-     * @param out reference to which the parameter's value should be written to.
-     */
-    template <class T>
-    AwsError ReadParam(const char * name, T & out) const;
-
     const std::weak_ptr<rclcpp::Node> node_;
 };
 

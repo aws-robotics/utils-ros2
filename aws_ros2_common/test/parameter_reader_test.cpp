@@ -21,11 +21,14 @@
 #include <aws_common/sdk_utils/aws_error.h>
 #include <aws_ros2_common/sdk_utils/ros2_node_parameter_reader.h>
 
+using namespace Aws::Client;
+using namespace std::chrono_literals;
+
+
 #define PARAM_READER_TEST__PARAM_PREFIX "configuration_namespace9181"
 #define PARAM_READER_TEST__PARAM_KEY "someBogusParamKey"
 #define PARAM_READER_TEST__PARAM_VALUE "uk-north-2180"
-using namespace Aws::Client;
-using namespace std::chrono_literals;
+
 
 TEST(ParameterReader, parameterPathResolution)
 {
@@ -46,13 +49,13 @@ TEST(ParameterReader, parameterPathResolution)
     ASSERT_EQ(param_path_flat_ros2_style.get_resolved_path('/', '.'), param_path_variadic.get_resolved_path('/', '.'));
 
     std::string flat_ros1_style_result;
-    parameter_reader->ReadStdString(param_path_flat_ros1_style, flat_ros1_style_result);
+    parameter_reader->ReadParam(param_path_flat_ros1_style, flat_ros1_style_result);
     std::string flat_ros2_style_result;
-    parameter_reader->ReadStdString(param_path_flat_ros2_style, flat_ros2_style_result);
+    parameter_reader->ReadParam(param_path_flat_ros2_style, flat_ros2_style_result);
     std::string variadic_result;
-    parameter_reader->ReadStdString(param_path_variadic, variadic_result);
+    parameter_reader->ReadParam(param_path_variadic, variadic_result);
     std::string complex_result;
-    parameter_reader->ReadStdString(param_path_complex, complex_result);
+    parameter_reader->ReadParam(param_path_complex, complex_result);
 
     ASSERT_NE(flat_ros1_style_result, flat_ros2_style_result);
     ASSERT_EQ(flat_ros2_style_result, variadic_result);
@@ -60,8 +63,8 @@ TEST(ParameterReader, parameterPathResolution)
     ASSERT_EQ(complex_result, std::string(PARAM_READER_TEST__PARAM_VALUE));
 
     std::string stored_complex_result = complex_result;
-    ASSERT_EQ(Aws::AwsError::AWS_ERR_NOT_SUPPORTED,
-              parameter_reader->ReadStdString("/some_ns/some_other_node.parameter", complex_result));
+    ASSERT_EQ(Aws::AwsError::AWS_ERR_NOT_SUPPORTED, parameter_reader->ReadParam(
+              ParameterPath({"some_ns", "some_other_node"}, {"parameter"}), complex_result));
     ASSERT_EQ(stored_complex_result, complex_result);
 }
 
@@ -73,12 +76,12 @@ TEST(ParameterReader, failureTests)
     auto nonexistent_path = ParameterPath("I don't exist");
     std::string nonexistent_path_result = PARAM_READER_TEST__PARAM_VALUE;
     /* Querying for a nonexistent parameter should return NOT_FOUND and the out parameter remains unchanged. */
-    ASSERT_EQ(Aws::AwsError::AWS_ERR_NOT_FOUND, parameter_reader->ReadStdString(nonexistent_path, nonexistent_path_result));
+    ASSERT_EQ(Aws::AwsError::AWS_ERR_NOT_FOUND, parameter_reader->ReadParam(nonexistent_path, nonexistent_path_result));
     ASSERT_EQ(nonexistent_path_result, std::string(PARAM_READER_TEST__PARAM_VALUE));
 
     dummy_node.reset();
     /* Using a deleted node should return a memory error and the out parameter remains unchanged. */
-    ASSERT_EQ(Aws::AwsError::AWS_ERR_MEMORY, parameter_reader->ReadStdString(nonexistent_path, nonexistent_path_result));
+    ASSERT_EQ(Aws::AwsError::AWS_ERR_MEMORY, parameter_reader->ReadParam(nonexistent_path, nonexistent_path_result));
     ASSERT_EQ(nonexistent_path_result, std::string(PARAM_READER_TEST__PARAM_VALUE));
 
     dummy_node = rclcpp::Node::make_shared("_");
