@@ -34,6 +34,7 @@ TEST(ParameterReader, parameterPathResolution)
 {
     Aws::Client::ClientConfiguration prepared_config;
     auto dummy_node = rclcpp::Node::make_shared("_");
+    dummy_node->declare_parameter(PARAM_READER_TEST__PARAM_PREFIX "." PARAM_READER_TEST__PARAM_KEY);
     auto parameter_reader = std::make_shared<Aws::Client::Ros2NodeParameterReader>(dummy_node);
     dummy_node->set_parameters(
         {rclcpp::Parameter(PARAM_READER_TEST__PARAM_PREFIX "." PARAM_READER_TEST__PARAM_KEY, PARAM_READER_TEST__PARAM_VALUE)}
