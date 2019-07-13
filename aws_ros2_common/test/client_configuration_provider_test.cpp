@@ -30,14 +30,19 @@
 void initialize_node_and_config(rclcpp::Node::SharedPtr node, Aws::Client::ClientConfiguration &config)
 {
     rclcpp::Parameter region(CLIENT_CONFIG_PREFIX ".region", "uk-north-20");
+    node->declare_parameter(CLIENT_CONFIG_PREFIX ".region");
     config.region = "uk-north-20";
     rclcpp::Parameter proxyPort(CLIENT_CONFIG_PREFIX ".proxy_port", 787);
+    node->declare_parameter(CLIENT_CONFIG_PREFIX ".proxy_port");
     config.proxyPort = 787;
     rclcpp::Parameter connectTimeoutMs(CLIENT_CONFIG_PREFIX ".connect_timeout_ms", 511111);
+    node->declare_parameter(CLIENT_CONFIG_PREFIX ".connect_timeout_ms");
     config.connectTimeoutMs = 511111;
     rclcpp::Parameter verifySSL(CLIENT_CONFIG_PREFIX ".verify_SSL", true);
+    node->declare_parameter(CLIENT_CONFIG_PREFIX ".verify_SSL");
     config.verifySSL = true;
     rclcpp::Parameter followRedirects(CLIENT_CONFIG_PREFIX ".follow_redirects", true);
+    node->declare_parameter(CLIENT_CONFIG_PREFIX ".follow_redirects");
     config.followRedirects = true;
     node->set_parameters({region, proxyPort, connectTimeoutMs, verifySSL, followRedirects});
 }
