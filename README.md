@@ -28,7 +28,7 @@ The source code is released under an [Apache 2.0].
 ## Installation
 
 ### Binaries
-On Ubuntu you can install the latest released version of this package using the following command
+Pending bloom-release. In the future, you'd be able to install the latest released version of this package using the following command on Ubuntu:
 
         sudo apt-get update
         sudo apt-get install -y ros-$ROS_DISTRO-aws-ros2-common
