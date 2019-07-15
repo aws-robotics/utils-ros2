@@ -1,5 +1,6 @@
 # AWS Utils Library for ROS2
 
+**Note: this repository is under active development. The package provided here is a release candidate; the API may change without notice and no support is provided for it at the moment.**
 
 ## Overview
 This is the common library for all of AWS RoboMaker ROS2 packages.
