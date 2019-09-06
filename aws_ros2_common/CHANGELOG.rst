@@ -2,8 +2,8 @@
 Changelog for package aws_ros2_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.0 (2019-09-06)
+------------------
 * Update README.md and package.xml meta tags (`#3 <https://github.com/aws-robotics/utils-ros2/issues/3>`_)
   * Update README.md and package.xml meta tags
   * Add disclaimer about lack of apt availability
