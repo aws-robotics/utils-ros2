@@ -6,7 +6,6 @@ add_compile_options(-std=c++14)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(aws_common REQUIRED)
-find_package(ament_cmake_gtest REQUIRED)
 
 if(AWSSDK_FOUND)
   set(SERVICE core)
@@ -33,26 +32,30 @@ install(
     DESTINATION include/
 )
 
-ament_add_gtest(test_configuration_provider test/client_configuration_provider_test.cpp)
-target_link_libraries(test_configuration_provider
-    ${aws_common_LIBRARIES}
-    ${PROJECT_NAME}
-    ${rclcpp_LIBRARIES}
-)
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+  
+  ament_add_gtest(test_configuration_provider test/client_configuration_provider_test.cpp)
+  target_link_libraries(test_configuration_provider
+      ${aws_common_LIBRARIES}
+      ${PROJECT_NAME}
+      ${rclcpp_LIBRARIES}
+  )
 
-ament_add_gtest(test_logger test/sdk_utils/logging/aws_ros_logger_test.cpp)
-target_link_libraries(test_logger
-    ${aws_common_LIBRARIES}
-    ${PROJECT_NAME}
-    ${rclcpp_LIBRARIES}
-)
+  ament_add_gtest(test_logger test/sdk_utils/logging/aws_ros_logger_test.cpp)
+  target_link_libraries(test_logger
+      ${aws_common_LIBRARIES}
+      ${PROJECT_NAME}
+      ${rclcpp_LIBRARIES}
+  )
 
-ament_add_gtest(test_parameter_reader test/parameter_reader_test.cpp)
-target_link_libraries(test_parameter_reader
-    ${aws_common_LIBRARIES}
-    ${PROJECT_NAME}
-    ${rclcpp_LIBRARIES}
-)
+  ament_add_gtest(test_parameter_reader test/parameter_reader_test.cpp)
+  target_link_libraries(test_parameter_reader
+      ${aws_common_LIBRARIES}
+      ${PROJECT_NAME}
+      ${rclcpp_LIBRARIES}
+  )
+endif()
 
 ament_export_libraries(${PROJECT_NAME})
 ament_export_include_directories("include")
