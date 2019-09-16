@@ -1,7 +1,5 @@
 # AWS Utils Library for ROS2
 
-**Note: this repository is under active development. The package provided here is a release candidate; the API may change without notice and no support is provided for it at the moment.**
-
 ## Overview
 This is the common library for all of AWS RoboMaker ROS2 packages.
 It builds on top of the generic interfaces defined by [utils-common](https://github.com/aws-robotics/utils-common) to provide ROS2-specific helper functions and classes implementations for things such as logging and parameter loading.
@@ -20,7 +18,7 @@ The source code is released under an [Apache 2.0].
 
 * Travis CI: [![Build Status](https://travis-ci.org/aws-robotics/utils-ros2.svg?branch=master)](https://travis-ci.org/aws-robotics/utils-ros2)
  * ROS build farm:
-   * ROS Dashing @ u18.04 Bionic [![Build Status](http://build.ros2.org/job/Bbin_uB64__aws_ros2_common__ubuntu_bionic_amd64__binary/badge/icon)](Bbin_uB64__aws_ros2_common__ubuntu_bionic_amd64__binary)
+   * ROS Dashing @ u18.04 Bionic [![Build Status](http://build.ros2.org/job/Dbin_uB64__aws_ros2_common__ubuntu_bionic_amd64__binary/badge/icon)](http://build.ros2.org/job/Dbin_uB64__aws_ros2_common__ubuntu_bionic_amd64__binary)
 
 [Amazon Web Services (AWS)]: https://aws.amazon.com/
 [Apache 2.0]: https://aws.amazon.com/apache-2-0/
@@ -61,4 +59,4 @@ _Note: If building the master branch instead of a release branch you may need to
 
 - Configure ROS library path
 
-        source ~/ros-workspace/install/setup.bash
+        source ~/ros-workspace/install/local_setup.bash
