@@ -38,12 +38,10 @@ To build from source you'll need to create a new workspace, clone and checkout t
 
 - Create a ROS workspace and a source directory: `mkdir -p ~/ros-workspace/src`
 
-- Clone the package into the source directory . 
-
-_Note: Replace __`{MAJOR.VERSION}`__ below with the latest major version number to get the latest release branch._
+- Clone the package into the source directory
 
         cd ~/ros-workspace/src
-        git clone https://github.com/aws-robotics/utils-ros2.git -b release-v{MAJOR.VERSION}
+        git clone https://github.com/aws-robotics/utils-ros2.git -b release-latest
 
 - Install dependencies
 
