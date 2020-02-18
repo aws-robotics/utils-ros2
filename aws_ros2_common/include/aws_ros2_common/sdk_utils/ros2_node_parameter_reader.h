@@ -26,7 +26,7 @@ namespace Client {
 class Ros2NodeParameterReader : public ParameterReaderInterface
 {
 public:
-    Ros2NodeParameterReader(const std::weak_ptr<rclcpp::Node> node) : node_(node) {}
+    explicit Ros2NodeParameterReader(const std::weak_ptr<rclcpp::Node>& node) : node_(node) {}
 
     AwsError ReadParam(const ParameterPath & param_path, std::vector<std::string> & out) const override;
     AwsError ReadParam(const ParameterPath & param_path, double & out) const override;
@@ -40,5 +40,7 @@ private:
     const std::weak_ptr<rclcpp::Node> node_;
 };
 
-} /* namespace */
-} /* namespace */
+}  // namespace Client
+
+}  // namespace Aws
+

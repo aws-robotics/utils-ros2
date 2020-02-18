@@ -29,7 +29,7 @@ constexpr char kNodeNsSeparator = '/';
  */
 template <class T>
 static AwsError ReadParamTemplate(const ParameterPath & param_path,
-                                  std::weak_ptr<rclcpp::Node> node,
+                                  const std::weak_ptr<rclcpp::Node>& node,
                                   T & out) {
     std::string name = param_path.get_resolved_path(kNodeNsSeparator, kParameterNsSeparator);
     if (std::string::npos != name.find(kNodeNsSeparator)) {
@@ -77,9 +77,11 @@ AwsError Ros2NodeParameterReader::ReadParam(const ParameterPath & param_path, Aw
     return result;
 }
 
-AwsError Ros2NodeParameterReader::ReadParam(const ParameterPath & param_path, std::map<std::string, std::string> & out) const {
+AwsError Ros2NodeParameterReader::ReadParam(const ParameterPath &  /*param_path*/, std::map<std::string, std::string> &  /*out*/) const {
     return AWS_ERR_NOT_SUPPORTED;
 }
 
-} /* namespace */
-} /* namespace */
+}  // namespace Client
+
+}  // namespace Aws
+
