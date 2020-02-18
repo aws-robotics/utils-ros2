@@ -34,6 +34,8 @@ public:
      * @param node
      */
     explicit AWSROSLogger(Aws::Utils::Logging::LogLevel log_level, std::weak_ptr<rclcpp::Node> node);
+    AWSROSLogger(AWSROSLogger const &) = delete;              // Do not allow copy constructor
+    AWSROSLogger & operator=(AWSROSLogger const &) = delete;  // Do not allow assignment operator
     ~AWSROSLogger() override;
 
 protected:
