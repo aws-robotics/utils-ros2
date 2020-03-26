@@ -20,7 +20,9 @@
 #include <rclcpp/rclcpp.hpp>
 #include <string>
 
-namespace Aws { namespace Utils { namespace Logging {
+namespace Aws {
+namespace Utils {
+namespace Logging {
 
 class AWSROSLogger : public AWSLogSystem
 {
@@ -32,7 +34,9 @@ public:
      * @param node
      */
     explicit AWSROSLogger(Aws::Utils::Logging::LogLevel log_level, std::weak_ptr<rclcpp::Node> node);
-    virtual ~AWSROSLogger();
+    AWSROSLogger(AWSROSLogger const &) = delete;              // Do not allow copy constructor
+    AWSROSLogger & operator=(AWSROSLogger const &) = delete;  // Do not allow assignment operator
+    ~AWSROSLogger() override;
 
 protected:
 
@@ -47,6 +51,8 @@ private:
     std::weak_ptr<rclcpp::Node> node_;
 };
 
-}}}
+}  // namespace Logging
+}  // namespace Utils
+}  // namespace Aws
 
 #endif  // AWS_COMMON_INCLUDE_SDK_UTILS_LOGGING_AWSROSLOGGER_H_

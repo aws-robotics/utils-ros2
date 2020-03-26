@@ -27,7 +27,7 @@
  * @param node
  * @param config
  */
-void initialize_node_and_config(rclcpp::Node::SharedPtr node, Aws::Client::ClientConfiguration &config)
+void initialize_node_and_config(const rclcpp::Node::SharedPtr& node, Aws::Client::ClientConfiguration &config)
 {
     rclcpp::Parameter region(CLIENT_CONFIG_PREFIX ".region", "uk-north-20");
     node->declare_parameter(CLIENT_CONFIG_PREFIX ".region");

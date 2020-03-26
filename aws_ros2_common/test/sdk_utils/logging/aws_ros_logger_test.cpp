@@ -25,11 +25,11 @@
 #include <gtest/gtest.h>
 #include <aws_ros2_common/sdk_utils/logging/aws_ros_logger.h>
 #include <aws/core/utils/logging/LogMacros.h>
-#include <stdio.h>
+#include <cstdio>
 
 using namespace Aws::Utils::Logging;
 
-typedef std::shared_ptr<AWSLogSystem> aws_logger_t;
+using aws_logger_t = std::shared_ptr<AWSLogSystem>;
 
 TEST(AWSROSLoggerTest, testStderr) {
     auto dummy_node = rclcpp::Node::make_shared("my_node_name");

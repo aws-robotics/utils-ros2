@@ -14,14 +14,18 @@
  */
 
 #include <rclcpp/rclcpp.hpp>
+#include <utility>
 #include <aws_ros2_common/sdk_utils/logging/aws_ros_logger.h>
 
-using namespace Aws::Utils::Logging;
 
-AWSROSLogger::AWSROSLogger(Aws::Utils::Logging::LogLevel log_level = LogLevel::Trace, std::weak_ptr<rclcpp::Node> node = std::weak_ptr<rclcpp::Node>{})
-    : node_(node), AWSLogSystem(log_level) {}
+namespace Aws {
+namespace Utils {
+namespace Logging {
 
-AWSROSLogger::~AWSROSLogger() {}
+AWSROSLogger::AWSROSLogger(Aws::Utils::Logging::LogLevel log_level, std::weak_ptr<rclcpp::Node> node)
+    : node_(std::move(node)), AWSLogSystem(log_level) {}
+
+AWSROSLogger::~AWSROSLogger() = default;
 
 void
 AWSROSLogger::LogInfo(const char* tag, const std::string& message) {
@@ -65,3 +69,7 @@ AWSROSLogger::LogFatal(const char* tag, const std::string& message) {
         RCLCPP_FATAL(node->get_logger(), "[%s] %s", tag, message.c_str());
     }
 }
+
+}  // namespace Logging
+}  // namespace Utils
+}  // namespace Aws
