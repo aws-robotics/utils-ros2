@@ -2,8 +2,8 @@
 Changelog for package aws_ros2_common
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.1 (2020-03-31)
+------------------
 * Bump package version to 1.0.1 (`#10 <https://github.com/aws-robotics/utils-ros2/issues/10>`_)
 * Fix linting issues found by clang-tidy 6.0 (`#9 <https://github.com/aws-robotics/utils-ros2/issues/9>`_)
   * clang-tidy fixes
