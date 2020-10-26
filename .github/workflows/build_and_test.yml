@@ -18,7 +18,7 @@ jobs:
       matrix:
         ros_distro: [dashing]
         include:
-        - ros_distro: melodic
+        - ros_distro: dashing
           ubuntu_distro: bionic
     container:
       image: rostooling/setup-ros-docker:ubuntu-${{ matrix.ubuntu_distro }}-ros-${{ matrix.ros_distro }}-ros-base-latest
